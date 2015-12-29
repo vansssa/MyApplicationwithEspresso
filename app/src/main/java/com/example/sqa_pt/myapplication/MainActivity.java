@@ -1,5 +1,6 @@
 package com.example.sqa_pt.myapplication;
 
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.app.Activity;
@@ -30,6 +31,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
         // Set the listeners for the buttons.
         findViewById(R.id.changeTextBt).setOnClickListener(this);
         findViewById(R.id.activityChangeTextBtn).setOnClickListener(this);
+        findViewById(R.id.btn_intent).setOnClickListener(this);
+        findViewById(R.id.launchlistview).setOnClickListener(this);
 
         mTextView = (TextView) findViewById(R.id.textToBeChanged);
         mEditText = (EditText) findViewById(R.id.editTextUserInput);
@@ -50,6 +53,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 Intent intent = ShowTextActivity.newStartIntent(this, text);
                 startActivity(intent);
                 break;
+            case R.id.btn_intent:
+                //Uri testdata=Uri.parse("tel:" + "Your Phone_number");
+
+                intent = new Intent(this, ShowTextActivity.class);
+                intent.putExtra("URL", "http://www.vogella.com");
+                startActivity(intent);
+            case R.id.launchlistview:
+                intent = new Intent(this,demolistview.class);
+                startActivity(intent);
         }
     }
 

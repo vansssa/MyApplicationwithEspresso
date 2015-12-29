@@ -57,4 +57,18 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:text="@string/open_activity_and_change_text"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="test intent"
+        android:id="@+id/btn_intent"
+        style="?android:attr/buttonStyleSmall" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="launch listview"
+        android:id="@+id/launchlistview" />
 </LinearLayout>
