@@ -15,7 +15,7 @@ import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
-import static android.support.test.espresso.Espresso.onView;
+
 import static android.support.test.espresso.Espresso.setFailureHandler;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.intent.Checks.checkNotNull;
@@ -46,7 +46,7 @@ public class demolistviewTest {
     }
     //Check:onData
     @Test
-    public void launchelistview()
+    public void click_item_notin_currentview()
     {
         onRow("item: 30").onChildView(withId(R.id.rowContentTextView)).perform(click());
         //onData(withItemContent("item: 30")) .perform(click());
@@ -61,4 +61,6 @@ public class demolistviewTest {
     private static DataInteraction onRow(String str) {
         return onData(hasEntry(Matchers.equalTo(demolistview.ROW_TEXT), is(str)));
     }
+
+
 }

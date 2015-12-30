@@ -1,14 +1,6 @@
 package com.example.sqa_pt.myapplication;
 
-import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.TextView;import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +25,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         findViewById(R.id.activityChangeTextBtn).setOnClickListener(this);
         findViewById(R.id.btn_intent).setOnClickListener(this);
         findViewById(R.id.launchlistview).setOnClickListener(this);
+        findViewById(R.id.btn_webview).setOnClickListener(this);
 
         mTextView = (TextView) findViewById(R.id.textToBeChanged);
         mEditText = (EditText) findViewById(R.id.editTextUserInput);
@@ -59,9 +52,15 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 intent = new Intent(this, ShowTextActivity.class);
                 intent.putExtra("URL", "http://www.vogella.com");
                 startActivity(intent);
+                break;
             case R.id.launchlistview:
                 intent = new Intent(this,demolistview.class);
                 startActivity(intent);
+                break;
+            case R.id.btn_webview:
+                intent = new Intent(this,webActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 

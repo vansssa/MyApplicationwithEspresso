@@ -22,6 +22,7 @@ public class demolistview extends Activity {
 
     @VisibleForTesting
     protected static final String ROW_TEXT = "ROW_TEXT";
+    protected static final String Foooter = "FOOTER";
 
     @VisibleForTesting
     protected static final String ROW_ENABLED = "ROW_ENABLED";

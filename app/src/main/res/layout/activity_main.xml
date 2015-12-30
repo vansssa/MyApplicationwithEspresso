@@ -71,4 +71,11 @@
         android:layout_height="wrap_content"
         android:text="launch listview"
         android:id="@+id/launchlistview" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="launch webView"
+        android:id="@+id/btn_webview" />
 </LinearLayout>
