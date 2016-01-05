@@ -54,7 +54,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.launchlistview:
-                intent = new Intent(this,demolistview.class);
+                intent = new Intent(this,demoliked.class);
                 startActivity(intent);
                 break;
             case R.id.btn_webview:

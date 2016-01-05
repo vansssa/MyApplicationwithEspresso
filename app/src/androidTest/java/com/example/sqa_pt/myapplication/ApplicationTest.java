@@ -1,7 +1,6 @@
 package com.example.sqa_pt.myapplication;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.ViewInteraction;
@@ -75,7 +74,7 @@ public class ApplicationTest {
         //custom failure exception
         setFailureHandler(new failureMessage(getInstrumentation().getTargetContext()));
         mDevice = UiDevice.getInstance(getInstrumentation());
-        mActivityRule.launchActivity(new Intent());
+        //mActivityRule.launchActivity(new Intent());
     }
 
 
@@ -90,7 +89,7 @@ public class ApplicationTest {
 
         // Check that the text was changed.
         onView(withId(R.id.textToBeChanged)).check(matches(withText(STRING_TO_BE_TYPED)));
-        mDevice.pressHome();
+       // mDevice.pressHome();
     }
 
     @Test
@@ -107,7 +106,7 @@ public class ApplicationTest {
 
             // Check that the text was changed
             onView(withId(R.id.textToBeChanged)).check(matches(withText(STRING_TO_BE_TYPED)));
-            mDevice.pressHome();
+          //  mDevice.pressHome();
         }catch (NoMatchingViewException e)
         {
             Log.i("VA 1",e.toString());
@@ -132,7 +131,7 @@ public class ApplicationTest {
         // UIAutomator code: check that contact is present in it after sync was triggered
         UiObject contactName = mDevice.findObject(new UiSelector().text("Hello World!"));
         assertTrue(contactName.exists());
-        mDevice.pressHome();
+       // mDevice.pressHome();
     }
 
 

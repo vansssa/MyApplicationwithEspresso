@@ -30,10 +30,36 @@
         android:textSize="16sp"
         android:layout_weight="1"/>
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_inputtext"
+        android:text="I&apos;m focus"
+        android:focusable="true"
+        android:enabled="true"
+        android:editable="true" />
+
     <ToggleButton
         android:id="@+id/rowToggleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text=""
+        android:focusableInTouchMode="false"
+        android:enabled="false" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_checkbox"
+        android:focusable="false"
+        android:checked="true" />
+
+    <RadioButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/row_radiobt"
+        android:focusable="false"
+        android:enabled="false"
+        android:checked="true" />
 
 </LinearLayout>
