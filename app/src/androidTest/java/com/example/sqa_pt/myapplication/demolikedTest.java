@@ -2,6 +2,7 @@ package com.example.sqa_pt.myapplication;
 
 import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.test.uiautomator.UiDevice;
@@ -9,7 +10,10 @@ import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
 import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
 
+import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.Matchers;
 import org.junit.After;
@@ -33,7 +37,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
-import static org.hamcrest.EasyMock2Matchers.equalTo;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.hasEntry;
@@ -55,11 +58,13 @@ public class demolikedTest {
 
 
     @Before
-    public void setUp() throws Exception{
+    public void setUp() throws Exception {
         //custom failure exception
-        setFailureHandler(new failureMessage(getInstrumentation().getTargetContext(),mActivityRule.getActivity()));
+        setFailureHandler(new failureMessage(getInstrumentation().getTargetContext(), mActivityRule.getActivity()));
         mDevice = UiDevice.getInstance(getInstrumentation());
-        itemcount=mActivityRule.getActivity().listView.getCount()-1;
+        itemcount = mActivityRule.getActivity().listView.getCount() - 1;
+        //closeSoftKeyboard();
+
     }
 
 
@@ -89,28 +94,27 @@ public class demolikedTest {
 
     @Test
     public void getitem_content() {
-        String result= "";
+        String result = "";
 
         //disable
-        DataInteraction item=onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(0);
+        DataInteraction item = onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(0);
         UiObject listview = new UiObject(new UiSelector().className("android.widget.TextView").resourceId("com.example.sqa_pt.myapplication:id/rowContentTextView").index(0));
         try {
             result= listview.getText().toString();
             Log.i("VA", "get index [0] " + result);
-
+            item.onChildView(withId(R.id.rowContentTextView)).check(matches(withText(result)));
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
         }
-        item.onChildView(withId(R.id.rowContentTextView)).check(matches(withText(result)));
+
     }
 
-    //hassilbing
-
+    //hasilbing: duplicate item content
     @Test
     public void a1_get_non_unique() {
         //ViewInteraction item=onView(allOf(withText("I'm focus"), hasSibling(withText("item: 6 kkbox"))));
 
-        ViewInteraction view=onView(allOf(withText("I'm focus"), hasSibling(withText("item: 6  kkbox"))));
+        ViewInteraction view = onView(allOf(withText("I'm focus"), hasSibling(withText("item: 5  kkbox"))));
         view.perform(clearText());
     }
 
@@ -118,11 +122,11 @@ public class demolikedTest {
     @Test
     public void check_component_status() {
 
-        DataInteraction item=onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(itemcount);
-
         //focused--inputtext
-        //item.onChildView(withId(R.id.row_inputtext)).check(matches(hasFocus()));
-        onView(withId(R.id.addlike)).check(matches(hasFocus()));
+        onView(withId(R.id.editText2)).check(matches(hasFocus()));
+
+        DataInteraction item = onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(itemcount);
+
         //checked--radio
         item.onChildView(withId(R.id.row_checkbox)).perform(click()).check(matches(isNotChecked()));
 
@@ -132,16 +136,43 @@ public class demolikedTest {
 
     }
 
-    public static Matcher<Object> withItemContent(String expectedText) {
-        checkNotNull(expectedText);
-        return withItemContent(equalTo(expectedText));
+
+    @Test
+    public void match_hint() {
+        String result = "";
+        onView(withId(R.id.editText2)).check(matches(withHint("search songs")));
     }
+
+
+
 
     private static DataInteraction onRow(String str) {
         return onData(hasEntry(Matchers.equalTo(demolistview.ROW_TEXT), is(str)));
     }
 
 
+    //custom matcher
+    static Matcher<View> withHint(final String substring) {
+        return withHint(is(substring));
+    }
+
+    static Matcher<View> withHint(final Matcher<String> stringMatcher) {
+        checkNotNull(stringMatcher);
+        return new BoundedMatcher<View, EditText>(EditText.class) {
+
+            @Override
+            public boolean matchesSafely(EditText view) {
+                final CharSequence hint = view.getHint();
+                return hint != null && stringMatcher.matches(hint.toString());
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("with hint: ");
+                stringMatcher.describeTo(description);
+            }
+        };
+    }
 
 
 }

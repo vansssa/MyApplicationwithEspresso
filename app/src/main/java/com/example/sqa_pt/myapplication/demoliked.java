@@ -47,7 +47,7 @@ public class demoliked extends Activity {
         setContentView(R.layout.activity_demoliked);
         populateData();
 
-        listView = (ListView) findViewById(R.id.likedlist);
+        listView = (ListView) findViewById(R.id.list);
         String[] from = new String[]{ROW_TEXT, ROW_ENABLED};
         int[] to = new int[]{R.id.rowContentTextView, R.id.rowToggleButton};
         layoutInflater = getLayoutInflater();
