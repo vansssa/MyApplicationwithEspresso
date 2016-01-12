@@ -49,7 +49,6 @@ public class demolistviewTest {
     public void click_item_notin_currentview()
     {
         onRow("item: 30").onChildView(withId(R.id.rowContentTextView)).perform(click());
-        //onData(withItemContent("item: 30")) .perform(click());
 
     }
 

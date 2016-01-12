@@ -9,7 +9,6 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -28,6 +27,7 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.setFailureHandler;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
+import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Checks.checkNotNull;
 import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
@@ -63,7 +63,7 @@ public class demolikedTest {
         setFailureHandler(new failureMessage(getInstrumentation().getTargetContext(), mActivityRule.getActivity()));
         mDevice = UiDevice.getInstance(getInstrumentation());
         itemcount = mActivityRule.getActivity().listView.getCount() - 1;
-        //closeSoftKeyboard();
+        closeSoftKeyboard();
 
     }
 
@@ -91,17 +91,16 @@ public class demolikedTest {
 
     //b. 動態資料的listview : T23868 （runway 判定）
     //⁃	espresso 無法取得值, 搭配uiautmator
-
     @Test
     public void getitem_content() {
         String result = "";
 
         //disable
         DataInteraction item = onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(0);
-        UiObject listview = new UiObject(new UiSelector().className("android.widget.TextView").resourceId("com.example.sqa_pt.myapplication:id/rowContentTextView").index(0));
+        UiObject listview = new UiObject(new UiSelector().className("android.widget.TextView").
+                resourceId("com.example.sqa_pt.myapplication:id/rowContentTextView").index(0));
         try {
             result= listview.getText().toString();
-            Log.i("VA", "get index [0] " + result);
             item.onChildView(withId(R.id.rowContentTextView)).check(matches(withText(result)));
         } catch (UiObjectNotFoundException e) {
             e.printStackTrace();
@@ -109,7 +108,7 @@ public class demolikedTest {
 
     }
 
-    //hasilbing: duplicate item content
+    //d. hasilbing: duplicate item content
     @Test
     public void a1_get_non_unique() {
         //ViewInteraction item=onView(allOf(withText("I'm focus"), hasSibling(withText("item: 6 kkbox"))));
@@ -144,13 +143,6 @@ public class demolikedTest {
     }
 
 
-
-
-    private static DataInteraction onRow(String str) {
-        return onData(hasEntry(Matchers.equalTo(demolistview.ROW_TEXT), is(str)));
-    }
-
-
     //custom matcher
     static Matcher<View> withHint(final String substring) {
         return withHint(is(substring));
@@ -166,6 +158,7 @@ public class demolikedTest {
                 return hint != null && stringMatcher.matches(hint.toString());
             }
 
+            //error message
             @Override
             public void describeTo(Description description) {
                 description.appendText("with hint: ");
@@ -173,6 +166,13 @@ public class demolikedTest {
             }
         };
     }
+
+    private static DataInteraction onRow(String str) {
+        return onData(hasEntry(Matchers.equalTo(demolistview.ROW_TEXT), is(str)));
+    }
+
+
+
 
 
 }

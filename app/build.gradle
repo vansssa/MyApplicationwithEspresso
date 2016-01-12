@@ -29,12 +29,14 @@ dependencies {
 
     androidTestCompile 'com.android.support.test:runner:0.3'
     androidTestCompile 'com.android.support.test:rules:0.3'
+    //add espresso 2.2
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2'
 
     // add this for intent mocking support
     androidTestCompile 'com.android.support.test.espresso:espresso-intents:2.2'
     // add this for webview testing support
     androidTestCompile 'com.android.support.test.espresso:espresso-web:2.2.1'
+    // add this for uiautomator testing tool support
     androidTestCompile 'com.android.support.test.uiautomator:uiautomator-v18:2.0.0'
 
 

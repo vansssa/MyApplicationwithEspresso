@@ -144,8 +144,6 @@ public class ApplicationTest {
         Intents.init();
         onView(withId(R.id.btn_intent)).perform(click());
 
-        //mActivityRule.launchActivity(new Intent(mActivityRule.getActivity().getApplicationContext(), ShowTextActivity.class));
-        //intended(toPackage("com.android.phone"));
         intended(toPackage("com.example.sqa_pt.myapplication"));
         intended(hasExtra("URL", "http://www.vogella.com"));
 
