@@ -30,8 +30,13 @@ import static org.hamcrest.CoreMatchers.containsString;
 public class webviewTest {
     UiDevice mDevice;
     @Rule
-    public ActivityTestRule<webActivity> mActivityRule = new ActivityTestRule<>(
-            webActivity.class);
+    public ActivityTestRule<webActivity> mActivityRule = new ActivityTestRule<webActivity>(webActivity.class, false, false) {
+        @Override
+        protected void afterActivityLaunched() {
+            // Enable JS!
+            onWebView().forceJavascriptEnabled();
+        }
+    };
 
 
     @Before

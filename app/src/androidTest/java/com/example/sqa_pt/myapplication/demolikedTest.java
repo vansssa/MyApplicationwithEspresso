@@ -1,6 +1,7 @@
 package com.example.sqa_pt.myapplication;
 
 import android.support.test.espresso.DataInteraction;
+import android.support.test.espresso.NoMatchingViewException;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.rule.ActivityTestRule;
@@ -9,6 +10,7 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -24,7 +26,6 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.setFailureHandler;
 import static android.support.test.espresso.action.ViewActions.clearText;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -60,7 +61,7 @@ public class demolikedTest {
     @Before
     public void setUp() throws Exception {
         //custom failure exception
-        setFailureHandler(new failureMessage(getInstrumentation().getTargetContext(), mActivityRule.getActivity()));
+        //setFailureHandler(new failureMessage(getInstrumentation().getTargetContext(), mActivityRule.getActivity()));
         mDevice = UiDevice.getInstance(getInstrumentation());
         itemcount = mActivityRule.getActivity().listView.getCount() - 1;
         closeSoftKeyboard();
@@ -112,9 +113,15 @@ public class demolikedTest {
     @Test
     public void a1_get_non_unique() {
         //ViewInteraction item=onView(allOf(withText("I'm focus"), hasSibling(withText("item: 6 kkbox"))));
-
-        ViewInteraction view = onView(allOf(withText("I'm focus"), hasSibling(withText("item: 5  kkbox"))));
+        try {
+            ViewInteraction view = onView(allOf(withText("I'm focus"), hasSibling(withText("item: 6  kkbox"))));
+        }catch (NoMatchingViewException e) {
+            Log.i("VA 1", e.toString());
+        }
+        Log.i("VA 2", "123");
+        ViewInteraction  view = onView(allOf(withText("I'm focus"), hasSibling(withText("item: 5  kkbox"))));
         view.perform(clearText());
+
     }
 
     //c. 單一物件的狀態（focus,select）:T23958
