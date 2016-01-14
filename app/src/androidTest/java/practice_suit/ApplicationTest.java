@@ -1,4 +1,4 @@
-package com.example.sqa_pt.myapplication;
+package practice_suit;
 
 import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
@@ -16,6 +16,10 @@ import android.support.test.uiautomator.UiSelector;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.util.Log;
+
+import com.example.sqa_pt.myapplication.MainActivity;
+import com.example.sqa_pt.myapplication.R;
+import com.example.sqa_pt.myapplication.failureMessage;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -83,7 +87,7 @@ public class ApplicationTest {
     public void changeText_sameActivity() {
         // Type text and then press the button
 
-        onView(withId(R.id.editTextUserInput))
+        onView(ViewMatchers.withId(R.id.editTextUserInput))
                 .perform(typeText(STRING_TO_BE_TYPED), closeSoftKeyboard());
         onView(withId(R.id.changeTextBt)).perform(click());
 

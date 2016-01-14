@@ -21,13 +21,12 @@ import static android.support.test.espresso.web.webdriver.DriverAtoms.clearEleme
 import static android.support.test.espresso.web.webdriver.DriverAtoms.findElement;
 import static android.support.test.espresso.web.webdriver.DriverAtoms.getText;
 import static android.support.test.espresso.web.webdriver.DriverAtoms.webClick;
-import static org.hamcrest.CoreMatchers.containsString;
 
 /**
  * Created by sqa-pt on 2015/12/30.
  */
 @RunWith(AndroidJUnit4.class)
-public class webviewTest {
+public class webview_demo {
     UiDevice mDevice;
     @Rule
     public ActivityTestRule<webActivity> mActivityRule = new ActivityTestRule<webActivity>(webActivity.class, false, false) {
@@ -47,34 +46,6 @@ public class webviewTest {
         mActivityRule.launchActivity(new Intent());
     }
 
-    @Test
-    public void typeTextInInput_clickButton_SubmitsForm() {
-
-
-        // Selects the WebView in your layout. If you have multiple WebViews you can also use a
-        // matcher to select a given WebView, onWebView(withId(R.id.web_view)).
-        onWebView()
-                // Find the input element by ID
-                .withElement(findElement(Locator.ID, "text_input"))
-                        // Clear previous input
-                .perform(clearElement())
-                        // Enter text into the input element
-                .perform(DriverAtoms.webKeys("MACCHIATO"))
-                        // Find the submit button
-                .withElement(findElement(Locator.ID, "submitBtn"))
-                        // Simulate a click via javascript
-                .perform(webClick())
-                        // Find the response element by ID
-                .withElement(findElement(Locator.ID, "response"))
-                        // Verify that the response page contains the entered text
-                .check(webMatches(getText(), Matchers.containsString("MACCHIATO")));
-    }
-
-    @Test
-    public void check_webText() {
-        onWebView().withElement(findElement(Locator.ID, "title_message")).check(webMatches(getText(), containsString("Hello Espresso Web!")));
-
-    }
 
     @Test
     public void check_changeText()
