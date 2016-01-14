@@ -20,15 +20,10 @@ import org.junit.runner.RunWith;
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
 import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Checks.checkNotNull;
-import static android.support.test.espresso.matcher.ViewMatchers.hasFocus;
-import static android.support.test.espresso.matcher.ViewMatchers.isChecked;
-import static android.support.test.espresso.matcher.ViewMatchers.isNotChecked;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static org.hamcrest.Matchers.anything;
 import static org.hamcrest.Matchers.hasEntry;
 import static org.hamcrest.Matchers.is;
 
@@ -66,25 +61,6 @@ public class custom_matcher_Demo {
         Thread.sleep(3000);
     }
 
-
-
-    //c. 單一物件的狀態（focus,select）:T23958
-    @Test
-    public void check_component_status() {
-
-        //focused--inputtext
-        onView(withId(R.id.editText2)).check(matches(hasFocus()));
-
-        DataInteraction item = onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(itemcount);
-
-        //checked--radio
-        item.onChildView(withId(R.id.row_checkbox)).perform(click()).check(matches(isNotChecked()));
-
-        //checked--select
-        item.onChildView(withId(R.id.row_radiobt)).check(matches(isChecked()));
-
-
-    }
 
     @Test
     public void match_hint() {

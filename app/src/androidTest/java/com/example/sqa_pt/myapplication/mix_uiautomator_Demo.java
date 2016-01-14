@@ -12,6 +12,7 @@ import android.support.test.uiautomator.UiSelector;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -67,6 +68,13 @@ public class mix_uiautomator_Demo {
         mDevice = UiDevice.getInstance(getInstrumentation());
         //mActivityRule.launchActivity(new Intent());
     }
+
+    @After
+    public void tearDown() throws Exception {
+        mDevice.pressHome();
+    }
+
+
 
 
     // espresso with uiautomator

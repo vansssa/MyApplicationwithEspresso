@@ -1,6 +1,5 @@
 package com.example.sqa_pt.myapplication;
 
-import android.content.Intent;
 import android.support.test.espresso.DataInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -39,9 +38,9 @@ public class onData_Demo {
     public void setUp() throws Exception{
         //custom failure exception
         setFailureHandler(new failureMessage(getInstrumentation().getTargetContext()));
-        mDevice = UiDevice.getInstance(getInstrumentation());
+        //mDevice = UiDevice.getInstance(getInstrumentation());
         itemcount = mActivityRule.getActivity().listView.getCount() - 1;
-        mActivityRule.launchActivity(new Intent());
+       // mActivityRule.launchActivity(new Intent());
     }
     //Check:onData
 

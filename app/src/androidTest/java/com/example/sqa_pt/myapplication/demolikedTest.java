@@ -10,7 +10,6 @@ import android.support.test.uiautomator.UiDevice;
 import android.support.test.uiautomator.UiObject;
 import android.support.test.uiautomator.UiObjectNotFoundException;
 import android.support.test.uiautomator.UiSelector;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
@@ -114,13 +113,14 @@ public class demolikedTest {
     public void a1_get_non_unique() {
         //ViewInteraction item=onView(allOf(withText("I'm focus"), hasSibling(withText("item: 6 kkbox"))));
         try {
-            ViewInteraction view = onView(allOf(withText("I'm focus"), hasSibling(withText("item: 6  kkbox"))));
+            ViewInteraction view = onView(allOf(withText("I'm focus"), hasSibling(withText("item: 5  kkbox"))));
         }catch (NoMatchingViewException e) {
-            Log.i("VA 1", e.toString());
         }
-        Log.i("VA 2", "123");
+
         ViewInteraction  view = onView(allOf(withText("I'm focus"), hasSibling(withText("item: 5  kkbox"))));
-        view.perform(clearText());
+        view.perform(clearText()).check(matches(withText("")));
+        onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(4).
+        check(matches(withText("")));
 
     }
 
