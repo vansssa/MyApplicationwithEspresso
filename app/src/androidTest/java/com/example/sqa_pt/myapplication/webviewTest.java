@@ -1,4 +1,4 @@
-package practice_suit;
+package com.example.sqa_pt.myapplication;
 
 import android.content.Intent;
 import android.support.test.espresso.web.webdriver.DriverAtoms;

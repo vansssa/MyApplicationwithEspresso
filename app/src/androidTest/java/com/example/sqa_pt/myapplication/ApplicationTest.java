@@ -1,4 +1,4 @@
-package practice_suit;
+package com.example.sqa_pt.myapplication;
 
 import android.app.Activity;
 import android.support.test.InstrumentationRegistry;
@@ -16,10 +16,6 @@ import android.support.test.uiautomator.UiSelector;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.util.Log;
-
-import com.example.sqa_pt.myapplication.MainActivity;
-import com.example.sqa_pt.myapplication.R;
-import com.example.sqa_pt.myapplication.failureMessage;
 
 import org.junit.Before;
 import org.junit.Rule;
