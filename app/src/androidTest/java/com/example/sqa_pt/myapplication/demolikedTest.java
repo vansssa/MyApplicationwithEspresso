@@ -124,6 +124,9 @@ public class demolikedTest {
 
     }
 
+
+
+
     //c. 單一物件的狀態（focus,select）:T23958
     @Test
     public void check_component_status() {
@@ -174,10 +177,10 @@ public class demolikedTest {
         };
     }
 
+
     private static DataInteraction onRow(String str) {
         return onData(hasEntry(Matchers.equalTo(demolistview.ROW_TEXT), is(str)));
     }
-
 
 
 

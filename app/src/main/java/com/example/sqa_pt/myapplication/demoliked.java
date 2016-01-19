@@ -60,7 +60,8 @@ public class demoliked extends Activity {
             @Override
             public void onClick(View v) {
 
-                data.add(makeItem(data.size() + 1, Long.toHexString(Double.doubleToLongBits(Math.random()))));
+                //data.add(makeItem(data.size(), Long.toHexString(Double.doubleToLongBits(Math.random()))));
+                data.add(makeItem(data.size(), "kkbox"));
                 // Send the data to the list.
 
                 listView.setAdapter(adapter);

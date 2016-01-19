@@ -1,6 +1,7 @@
 package com.example.sqa_pt.myapplication;
 
 import android.app.Activity;
+import android.support.test.espresso.DataInteraction;
 import android.support.test.espresso.action.ViewActions;
 import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
@@ -19,13 +20,17 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static android.support.test.InstrumentationRegistry.getInstrumentation;
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.setFailureHandler;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static android.support.test.espresso.action.ViewActions.typeText;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.Matchers.anything;
 /**
  * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
  */
@@ -96,6 +101,26 @@ public class mix_uiautomator_Demo {
         UiObject contactName = mDevice.findObject(new UiSelector().text("Hello World!"));
         assertTrue(contactName.exists());
        // mDevice.pressHome();
+    }
+
+
+    //b. 動態資料的listview : T23868 （runway 判定）
+    //⁃	espresso 無法取得值, 搭配uiautmator
+    @Test
+    public void getitem_content() {
+        String result = "";
+
+        //disable
+        DataInteraction item = onData(anything()).inAdapterView(withId((R.id.likedlist))).atPosition(0);
+        UiObject listview = new UiObject(new UiSelector().className("android.widget.TextView").
+                resourceId("com.example.sqa_pt.myapplication:id/rowContentTextView").index(0));
+        try {
+            result= listview.getText().toString();
+            item.onChildView(withId(R.id.rowContentTextView)).check(matches(withText(result)));
+        } catch (UiObjectNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

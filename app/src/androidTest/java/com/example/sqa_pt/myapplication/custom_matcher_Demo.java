@@ -65,6 +65,7 @@ public class custom_matcher_Demo {
     @Test
     public void match_hint() {
         String result = "";
+        //hasImeAction();
         onView(withId(R.id.editText2)).check(matches(withHint("search songs")));
     }
 
