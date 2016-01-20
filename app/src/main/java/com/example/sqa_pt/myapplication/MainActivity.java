@@ -43,7 +43,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 break;
             case R.id.activityChangeTextBtn:
                 // Second button's interaction: start an activity and send a message to it.
-                Intent intent = ShowTextActivity.newStartIntent(this, text);
+                //Intent intent = ShowTextActivity.newStartIntent(this, text);
+                //startActivity(intent);
+                Intent intent = getPackageManager().getLaunchIntentForPackage("com.example.sqa_pt.testapplication");
                 startActivity(intent);
                 break;
             case R.id.btn_intent:
